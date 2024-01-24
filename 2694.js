@@ -33,12 +33,10 @@ class EventEmitter {
    */
   emit(eventName, args = []) {
     let events = []
-    let arrayMap = this.subs.get(eventName)
-
-    if (arrayMap) {
-      for (let element of arrayMap) {
+    if (this.subs.get(eventName)) {
+      this.subs.get(eventName).map((element) => {
         events.push(element(...args))
-      }
+      })
     }
     return events
   }
